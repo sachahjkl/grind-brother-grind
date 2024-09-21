@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struggle</title>
+    <link rel="icon" href="./computer-ani.gif">
+    <style>
+        @font-face {
+            font-family: 'Routed Gothic';
+            src: url('./routed-gothic.ttf');
+        }
+
+        #pics {
+            background-color: rgb(32, 32, 32);
+            border-color: rgb(76, 76, 76);
+            border-right-color: rgb(166, 166, 166);
+            border-bottom-color: rgb(166, 166, 166);
+            border-width: 5px;
+            border-style: solid;
+            max-width: 1000px;
+            margin-inline: 2rem;
+            margin-block: .5rem;
+            display: flex;
+            flex-direction: row;
+            overflow: auto;
+            align-items: center;
+            gap: 1rem;
+            height: 290px;
+            scrollbar-color: #0400ff black;
+            scrollbar-width: thin;
+
+        }
+
+        #pics img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .marquee {
+            border: 2px dotted cornflowerblue;
+            padding: 5px 15px;
+            overflow: hidden;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 1.5rem;
+            background-color: black;
+            border-radius: 5px;
+
+        }
+
+        img {
+            max-width: 100vw;
+        }
+
+        #readyingup {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            height: 30%;
+            z-index: -1;
+            transform: scale(1);
+            transition: transform 0.15s;
+            will-change: transform;
+        }
+
+        h1 {
+            margin-block-end: 0px;
+        }
+
+        #readyingup:hover {
+            transform: scale(1.1);
+        }
+
+        #readyingup:active {
+            transform: scale(0.9);
+        }
+
+        html {
+            background: url('./background_edit.png') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .linklist {
+            margin-inline-start: auto;
+            ;
+            display: inline-block;
+        }
+
+        * {
+            font-weight: bold;
+            font-family: 'Routed Gothic', 'Times New Roman', Times, serif;
+
+            color: white;
+        }
+
+        .linklist a {
+            font-size: 24px;
+            text-decoration: underline dotted 1px white;
+        }
+
+        #firstrow {
+            margin-inline: 3rem;
+            gap: 1rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        #rollcredits {
+            max-height: 45ch;
+            overflow: hidden;
+        }
+
+        #credits {
+            text-shadow: 1px 1px 2px black;
+            transform: translateY(0);
+            /*loop the credits animation infinitely */
+            animation-delay: 1.5s;
+            animation-name: credits;
+            animation-duration: 30s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes credits {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        #pointing {
+            pointer-events: none;
+            --rotation: 0deg;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 45%;
+            filter: drop-shadow(20px 20px 0.75rem rgba(98, 0, 0, 0.21));
+            z-index: 1;
+            transform-origin: 20% 90%;
+            transform: rotate(var(--rotation));
+        }
+
+        pre {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .neonText {
+            color: #fff;
+            text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #0fa,
+                0 0 82px #0fa,
+                0 0 92px #0fa,
+                0 0 102px #0fa,
+                0 0 151px #0fa;
+            animation: neonText 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonText {
+            from {
+                text-shadow:
+                    0 0 7px #fff,
+                    0 0 10px #fff,
+                    0 0 21px #fff,
+                    0 0 42px #0fa,
+                    0 0 82px #0fa,
+                    0 0 92px #0fa,
+                    0 0 102px #0fa,
+                    0 0 151px #0fa;
+            }
+
+            to {
+                text-shadow:
+                    0 0 7px #fff,
+                    0 0 10px #fff,
+                    0 0 21px #fff,
+                    0 0 42px #f0f,
+                    0 0 82px #f0f,
+                    0 0 92px #f0f,
+                    0 0 102px #f0f,
+                    0 0 151px #f0f;
+            }
+        }
+
+        #maintitle {
+            margin: 4rem auto 3rem auto;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* scale font size of title to fit screen */
+        @media screen and (min-width: 1000px) {
+            #maintitle {
+                font-size: clamp(1rem, 10vw, 4rem);
+            }
+
+            #maintitle img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            #maintitle {
+                font-size: clamp(1rem, 6vw, 2rem);
+            }
+
+        }
+
+        .marquee {
+            overflow: hidden;
+            --offset: 20vw;
+            --move-initial: calc(-25% + var(--offset));
+            --move-final: calc(-50% + var(--offset));
+        }
+
+        .marquee-text {
+            width: fit-content;
+            display: flex;
+            position: relative;
+            text-wrap: nowrap;
+            transform: translate3d(var(--move-initial), 0, 0);
+            animation: marquee 100s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translate3d(var(--move-initial), 0, 0);
+            }
+
+            100% {
+                transform: translate3d(var(--move-final), 0, 0);
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pointing = document.getElementById('pointing');
+            const fingerDegreesOffest = 31.9
+
+
+            window.addEventListener('mousemove', function (e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                origin = {
+                    x: pointing.clientWidth * 0.2,
+                    y: window.innerHeight - pointing.clientHeight * 0.1
+                }
+                // calculate the rotation angle relative to the bottom left corner of the window
+                const rotation = Math.atan2(y - origin.y, x - origin.x) * 180 / Math.PI;
+                pointing.style.setProperty('--rotation', rotation + fingerDegreesOffest + 'deg');
+            });
+
+            const pics = document.getElementById('pics');
+            // scroll horizontally when scrolling vertically
+            pics.addEventListener('wheel', function (e) {
+                e.preventDefault();
+                const delta = - e.deltaY;
+                const scrollLeft = pics.scrollLeft;
+                pics.scrollLeft = scrollLeft - delta;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1 class="neonText" style="margin-bottom: 0rem;" id="maintitle">
+        <img width="35px" height="35px" src="./computer-ani.gif" alt="computer">
+        &gt;&gt;START
+        HERE&lt;&lt;
+        <img width="35px" height="35px" src="./computer-ani.gif" alt="computer">
+
+    </h1>
+    <h2 style="font-style: italic; text-align: center; margin-top: 0; opacity: .5;">No gaming allowed</h2>
+    <section class="marquee">
+        <div class="marquee-text">
+            cache line size matters because fetching memory outside a cache line is slow the CPU reads memory in chunks
+            usually 64 bytes wide when a data structure spans across two lines the CPU fetches both lines causing
+            latency
+            keep structures within a cache line for speed memory bus width is the number of bits transferred in one
+            operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
+            modern
+            CPUs optimize for specific alignment use aligned malloc for better performance data packing happens when
+            structs
+            have padding the compiler adds bytes to align fields on word boundaries for fast access packing fields
+            tightly
+            with #pragma pack removes padding but may slow access due to misalignment always balance between tight
+            packing
+            and proper alignment early error handling in C is crucial errors propagate fast the longer they go unhandled
+            check return values of functions and fail early it avoids cascading failures program termination should be
+            clean
+            exit codes matter zero means success non-zero indicates failure the caller can check this keep exit points
+            in
+            mind when designing functions use of asserts and debug logs help spot early failures zip zero initialization
+            is
+            a trick in C set memory to zero memset struct arrays before use to prevent uninitialized data bugs a common
+            source of crashes pointer arithmetic is dangerous always check boundaries buffer overruns are fatal in C
+            bounds
+            checking is manual think carefully before using pointers inline functions can reduce overhead for small
+            utility
+            functions but don't inline everything too much inlining increases code size blowing up instruction cache
+            branch
+            prediction in CPUs is key for fast execution the CPU guesses where code will go if it guesses wrong the
+            pipeline
+            flushes causing delays arrange if-else conditions for predictable branches frequent cases should be at the
+            top
+            minimize unpredictable jumps
+        </div>
+    </section>
+    <section id="firstrow">
+        <div style="overflow: hidden;">
+            <h1>
+                <img src="./title.png" alt="see you space cowboy...">
+            </h1>
+            <div id="rollcredits">
+                <pre id="credits">
+A BELL LABORATORIES PRODUCTION
+In association with the Research Division
+
+-----------------------------------------
+
+UNIX OPERATING SYSTEM
+Created by:
+
+Ken Thompson
+Dennis Ritchie
+
+-----------------------------------------
+
+Original Developers and Contributors:
+
+- Ken Thompson - Lead Architect, Kernel Development
+- Dennis Ritchie - C Developer, Compiler & Language Designer
+- Douglas McIlroy - Pipeline Concept, Unix Philosophy
+- Brian Kernighan - Co-author of AWK, Unix Documentation
+- Joe Ossanna - TROFF Developer, Text Processing System
+- Peter G. Neumann - Early Contributor, Security Principles
+- Rudd Canaday - File System Design
+- Stephen Bourne - Bourne Shell (sh) Creator
+- Rob Pike - Plan 9 Developer, Visual Tools
+- John Mashey - Performance Enhancements, Commercial Extensions
+- Tom Van Vleck - Early Contributor, Multics Influence
+
+-----------------------------------------
+
+Special Thanks To:
+
+- Bell Labs Research Division - For support and innovation
+- The Multics Project - For early inspirations
+- AT&T Corporation - For commercializing Unix
+
+-----------------------------------------
+
+Historical Milestones:
+
+- 1971 - First Unix Release
+- 1973 - Unix Rewritten in C
+- 1979 - Release of Version 7
+- 1983 - Introduction of System V
+- 1991 - Release of the Linux Kernel by Linus Torvalds
+
+-----------------------------------------
+
+Legacy and Inspiration:
+
+Unix-inspired systems and descendants include:
+
+- BSD
+- Linux
+- Solaris
+- MacOS
+- Android
+
+-----------------------------------------
+
+"The UNIX Philosophy"
+Small is beautiful, simplicity is key.
+</pre>
+            </div>
+        </div>
+
+
+        <div class="links">
+
+            <h2>kino video</h2>
+            <ul class="linklist">
+                <li>CHADMAN Confirmed:
+                    <a
+                        href="https://www.youtube.com/watch?v=TZ5a3gCCZYo">https://www.youtube.com/watch?v=TZ5a3gCCZYo</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.youtube.com/watch?v=xt1KNDmOYqA">https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.youtube.com/watch?v=r9gRk-Px7l4&">https://www.youtube.com/watch?v=r9gRk-Px7l4&</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.youtube.com/watch?v=m5wsfLeQxH4">https://www.youtube.com/watch?v=m5wsfLeQxH4</a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.youtube.com/watch?v=IroPQ150F6c">https://www.youtube.com/watch?v=IroPQ150F6c</a>
+                </li>
+            </ul>
+            <hr>
+            <h2>cool blogposts and channels</h2>
+            <ul>
+                <li><a href="https://www.rfleury.com/p/the-easiest-way-to-handle-errors">The Easiest Way To Handle
+                        Errors Is To Not Have Them</a></li>
+
+                <li><a
+                        href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/#:~:text=Use%20a%20data%20structure%20that%20makes%20illegal%20states%20unrepresentable">Parse,
+                        don't validate</a></li>
+                <li><a href="https://www.youtube.com/@voxelrifts/videos">VoxelRifts</a></li>
+                <li><a href="https://www.youtube.com/watch?v=fLS99zJDHOc">From 0 TO 100</a></li>
+            </ul>
+
+            <h2>cool pics</h2>
+            <section id="pics">
+                <img src="./readyingup.png" alt="readying up">
+                <img src="./arch.png" alt="arch">
+                <img src="nagoorcorejava.gif" alt="nagoorcorejava">
+                <img src="mantra.jpg" alt="mantra">
+                <img src="./rest/1561298440876.gif" alt="rest">
+                <img src="./rest/1564129793038.gif" alt="rest">
+                <img src="./rest/2b5658e67fd06c3e6df0c7fdca7c1db1.jpg" alt="rest">
+                <img src="./rest/799px-Windows_2000_architecture.svg.png" alt="rest">
+                <img src="./rest/nice_proprietary_software.png" alt="rest">
+
+            </section>
+
+        </div>
+    </section>
+    <img id="pointing" src="./pointing.png" alt="pointing at the sky">
+
+
+</body>
+
+</html>
