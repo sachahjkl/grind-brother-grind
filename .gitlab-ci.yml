@@ -3,9 +3,9 @@ image: busybox
 pages:
   stage: deploy
   script:
-    - mkdir public
-    - shopt -s extglob
-    - cp -R !(public) public
+    - mkdir /tmp/public
+    - cp -R ./ /tmp/public
+    - mv /tmp/public/ ./public
   artifacts:
     paths:
       - public
