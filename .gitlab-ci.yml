@@ -4,7 +4,8 @@ pages:
   stage: deploy
   script:
     - mkdir public
-    - cp -R ./* public
+    - shopt -s extglob
+    - cp -R !(public) public
   artifacts:
     paths:
       - public
