@@ -1,0 +1,10 @@
+# The Docker image that will be used to build your app
+image: busybox
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -R ./* public
+  artifacts:
+    paths:
+      - public
