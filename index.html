@@ -294,7 +294,7 @@
         }
       }
 
-            @media screen and (max-width: 400px) {
+      @media screen and (max-width: 400px) {
         :root {
           --main-font-size: 1.4rem;
           --sub-font-size: 1rem;
@@ -452,7 +452,20 @@
           <h1>
             <img src="./title.png" alt="see you space cowboy..." />
           </h1>
-          <div style="max-height: 45ch; overflow: hidden">
+          <div
+            style="
+              max-height: 45ch;
+              overflow-y: hidden;
+              overflow-x: auto;
+              /* slim scrollbar */
+              scrollbar-width: thin;
+              scrollbar-color: gold rgb(0 0 0 / 0.55);
+              border: 2px solid rgb(255 255 255 / 0.5);
+              padding: 0.5rem;
+              background-color: rgb(0 0 0 / 0.55);
+              backdrop-filter: blur(15px);
+            "
+          >
             <style>
               #credits {
                 text-shadow: 1px 1px 2px black;
@@ -463,6 +476,9 @@
                 animation-duration: 30s;
                 animation-iteration-count: infinite;
                 animation-timing-function: linear;
+              }
+              #credits:hover {
+                animation-play-state: paused !important;
               }
 
               @keyframes credits {
@@ -546,23 +562,27 @@ Small is beautiful, simplicity is key.
           <h2>✨ kino video</h2>
           <ul class="linklist">
             <li>
-              CHADMAN Confirmed:
+              CHADMAN Confirmed -
               <a href="https://www.youtube.com/watch?v=TZ5a3gCCZYo">https://www.youtube.com/watch?v=TZ5a3gCCZYo</a>
             </li>
             <li>
-              <a href="https://www.youtube.com/watch?v=xt1KNDmOYqA">https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
+              ZERO = VALID VALUE ?? -
+              <a href="https://www.youtube.com/watch?v=xt1KNDmOYqA"> https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
             </li>
             <li>
+                WAIT..? IT'S ALL JUST BYTES ? -
               <a href="https://www.youtube.com/watch?v=r9gRk-Px7l4&">https://www.youtube.com/watch?v=r9gRk-Px7l4&</a>
             </li>
             <li>
+                You can just *DO* stuff -
               <a href="https://www.youtube.com/watch?v=m5wsfLeQxH4">https://www.youtube.com/watch?v=m5wsfLeQxH4</a>
             </li>
             <li>
+                Make it simple, make it work, understand it, make it twerk -
               <a href="https://www.youtube.com/watch?v=IroPQ150F6c">https://www.youtube.com/watch?v=IroPQ150F6c</a>
             </li>
           </ul>
-          <hr style="margin-block: 1rem" />
+          <hr style="color: white; width: 100%; margin-block: 1rem; background-color: white" />
           <h2>😎 cool blogposts and channels</h2>
           <ul>
             <li>
@@ -581,13 +601,15 @@ Small is beautiful, simplicity is key.
             <li><a href="https://www.youtube.com/watch?v=fLS99zJDHOc">From 0 TO 100</a></li>
           </ul>
 
+          <hr style="color: white; width: 100%; margin-block: 1rem; background-color: white" />
+
           <h2>📸 cool pics</h2>
           <section
             class="reactive-image"
             id="pics"
             style="
               background-color: rgb(32 32 32 / 50%);
-              /* blur effect */
+
               backdrop-filter: blur(5px);
               border-color: rgb(76, 76, 76);
               border-top-color: rgb(166, 166, 166);
