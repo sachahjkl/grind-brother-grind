@@ -1,338 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Struggle</title>
-    <link rel="icon" href="./computer-ani.gif">
+    <link rel="icon" href="./computer-ani.gif" />
+    <style id="reset">
+      /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+    </style>
     <style>
-        @font-face {
-            font-family: 'Routed Gothic';
-            src: url('./routed-gothic.ttf');
+      @font-face {
+        font-family: "Routed Gothic";
+        src: url("./routed-gothic.ttf");
+      }
+
+      .links h2 {
+        font-size: x-large;
+        margin-block: 1rem;
+      }
+
+      .links ul {
+        list-style: square;
+        padding-inline-start: 2rem;
+        margin-block: 0.5rem;
+      }
+
+      .links a {
+        background-image: linear-gradient(
+          to left,
+          violet,
+          blueviolet,
+          lightskyblue,
+          chartreuse,
+          gold,
+          darkorange,
+          crimson
+        );
+        -webkit-background-clip: text;
+        font-size: large;
+
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(2px 2px 3px black);
+        text-decoration: none;
+        transition: text-decoration 100ms ease-out;
+      }
+
+      .links a:hover {
+        text-decoration: underline 1px cyan;
+      }
+
+      .reactive-image img {
+        transform: scale(1);
+        transition: transform 0.15s;
+        will-change: transform;
+      }
+
+      .reactive-image img:hover {
+        transform: scale(0.9);
+      }
+
+      .reactive-image img:active {
+        transform: scale(0.8);
+      }
+
+      html {
+        background: url("./background_edit.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+        font-weight: bold;
+        font-family: "Routed Gothic", "Times New Roman", Times, serif;
+        color: white;
+      }
+
+      .pointing-mouseover {
+        opacity: 0.5;
+        z-index: -3;
+      }
+
+      #pointing {
+        pointer-events: none;
+        --rotation: 0deg;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 45%;
+        filter: drop-shadow(20px 20px 0.75rem rgba(98, 0, 0, 0.21));
+        z-index: 1;
+        transform-origin: 20% 90%;
+        transform: rotate(var(--rotation));
+        transition: opacity 100ms ease-out;
+      }
+
+      .neonText {
+        color: #fff;
+        text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,
+          0 0 102px #0fa, 0 0 151px #0fa;
+        animation: neonText 1s ease-in-out infinite alternate;
+      }
+
+      @keyframes neonText {
+        from {
+          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,
+            0 0 102px #0fa, 0 0 151px #0fa;
         }
 
-        #pics {
-            background-color: rgb(32, 32, 32);
-            border-color: rgb(76, 76, 76);
-            border-right-color: rgb(166, 166, 166);
-            border-bottom-color: rgb(166, 166, 166);
-            border-width: 5px;
-            border-style: solid;
-            max-width: 1000px;
-            margin-inline: 2rem;
-            margin-block: .5rem;
-            display: flex;
-            flex-direction: row;
-            overflow: auto;
-            align-items: center;
-            gap: 1rem;
-            height: 290px;
-            scrollbar-color: #0400ff black;
-            scrollbar-width: thin;
-
+        to {
+          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f0f, 0 0 82px #f0f, 0 0 92px #f0f,
+            0 0 102px #f0f, 0 0 151px #f0f;
         }
+      }
 
-        #pics img {
-            max-width: 100%;
-            max-height: 100%;
-        }
+      #maintitle {
+        /* margin: 4rem auto 3rem auto; */
+        z-index: 2;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-        .marquee {
-            border: 2px dotted cornflowerblue;
-            padding: 5px 15px;
-            overflow: hidden;
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            font-size: 1.5rem;
-            background-color: black;
-            border-radius: 5px;
-
-        }
-
-        img {
-            max-width: 100vw;
-        }
-
-        #readyingup {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            height: 30%;
-            z-index: -1;
-            transform: scale(1);
-            transition: transform 0.15s;
-            will-change: transform;
-        }
-
-        h1 {
-            margin-block-end: 0px;
-        }
-
-        #readyingup:hover {
-            transform: scale(1.1);
-        }
-
-        #readyingup:active {
-            transform: scale(0.9);
-        }
-
-        html {
-            background: url('./background_edit.png') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-
-        .linklist {
-            margin-inline-start: auto;
-            ;
-            display: inline-block;
-        }
-
-        * {
-            font-weight: bold;
-            font-family: 'Routed Gothic', 'Times New Roman', Times, serif;
-
-            color: white;
-        }
-
-        .linklist a {
-            font-size: 24px;
-            text-decoration: underline dotted 1px white;
-        }
-
-        #firstrow {
-            margin-inline: 3rem;
-            gap: 1rem;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-
-        #rollcredits {
-            max-height: 45ch;
-            overflow: hidden;
-        }
-
-        #credits {
-            text-shadow: 1px 1px 2px black;
-            transform: translateY(0);
-            /*loop the credits animation infinitely */
-            animation-delay: 1.5s;
-            animation-name: credits;
-            animation-duration: 30s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        @keyframes credits {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-100%);
-            }
-        }
-
-        #pointing {
-            pointer-events: none;
-            --rotation: 0deg;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 45%;
-            filter: drop-shadow(20px 20px 0.75rem rgba(98, 0, 0, 0.21));
-            z-index: 1;
-            transform-origin: 20% 90%;
-            transform: rotate(var(--rotation));
-        }
-
-        pre {
-            color: white;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-        }
-
-        .neonText {
-            color: #fff;
-            text-shadow:
-                0 0 7px #fff,
-                0 0 10px #fff,
-                0 0 21px #fff,
-                0 0 42px #0fa,
-                0 0 82px #0fa,
-                0 0 92px #0fa,
-                0 0 102px #0fa,
-                0 0 151px #0fa;
-            animation: neonText 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonText {
-            from {
-                text-shadow:
-                    0 0 7px #fff,
-                    0 0 10px #fff,
-                    0 0 21px #fff,
-                    0 0 42px #0fa,
-                    0 0 82px #0fa,
-                    0 0 92px #0fa,
-                    0 0 102px #0fa,
-                    0 0 151px #0fa;
-            }
-
-            to {
-                text-shadow:
-                    0 0 7px #fff,
-                    0 0 10px #fff,
-                    0 0 21px #fff,
-                    0 0 42px #f0f,
-                    0 0 82px #f0f,
-                    0 0 92px #f0f,
-                    0 0 102px #f0f,
-                    0 0 151px #f0f;
-            }
-        }
-
+      /* scale font size of title to fit screen */
+      @media screen and (min-width: 1000px) {
         #maintitle {
-            margin: 4rem auto 3rem auto;
-            z-index: 2;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
+          font-size: clamp(1rem, 10vw, 4rem);
         }
 
-        /* scale font size of title to fit screen */
-        @media screen and (min-width: 1000px) {
-            #maintitle {
-                font-size: clamp(1rem, 10vw, 4rem);
-            }
-
-            #maintitle img {
-                width: 100px;
-                height: 100px;
-            }
+        #maintitle img {
+          width: 100px;
+          height: 100px;
         }
+      }
 
-        @media screen and (max-width: 1000px) {
-            #maintitle {
-                font-size: clamp(1rem, 6vw, 2rem);
-            }
-
+      @media screen and (max-width: 1000px) {
+        #maintitle {
+          font-size: clamp(1rem, 6vw, 2rem);
         }
+      }
 
-        .marquee {
-            overflow: hidden;
-            --offset: 20vw;
-            --move-initial: calc(-25% + var(--offset));
-            --move-final: calc(-50% + var(--offset));
+      /* Visual style of the marquee */
+      .marquee {
+        border: 2px dotted cornflowerblue;
+        padding: 5px 15px;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        font-size: 1.5rem;
+        background-color: black;
+        border-radius: 5px;
+      }
+
+      /* Behavior of the marquee */
+      .marquee {
+        --gap: 1rem;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        gap: var(--gap);
+      }
+
+      @keyframes scroll {
+        from {
+          transform: translateX(0);
         }
-
-        .marquee-text {
-            width: fit-content;
-            display: flex;
-            position: relative;
-            text-wrap: nowrap;
-            transform: translate3d(var(--move-initial), 0, 0);
-            animation: marquee 100s linear infinite;
+        to {
+          transform: translateX(calc(-100% - var(--gap)));
         }
+      }
 
-        @keyframes marquee {
-            0% {
-                transform: translate3d(var(--move-initial), 0, 0);
-            }
+      .marquee__content {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: space-around;
+        gap: var(--gap);
+        min-width: 100%;
+        animation: scroll 400s linear infinite;
+      }
 
-            100% {
-                transform: translate3d(var(--move-final), 0, 0);
-            }
-        }
+      .marquee__content:hover,
+      .marquee__content:hover + * {
+        animation-play-state: paused !important;
+      }
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const pointing = document.getElementById('pointing');
-            const fingerDegreesOffest = 31.9
+      document.addEventListener("DOMContentLoaded", function () {
+        const pointing = document.getElementById("pointing");
+        const fingerDegreesOffest = 31.9;
 
+        window.addEventListener("mousemove", function (e) {
+          const x = e.clientX;
+          const y = e.clientY;
+          origin = {
+            x: pointing.clientWidth * 0.2,
+            y: window.innerHeight - pointing.clientHeight * 0.1,
+          };
+          // calculate the rotation angle relative to the bottom left corner of the window
+          const rotation = (Math.atan2(y - origin.y, x - origin.x) * 180) / Math.PI;
+          pointing.style.setProperty("--rotation", rotation + fingerDegreesOffest + "deg");
 
-            window.addEventListener('mousemove', function (e) {
-                const x = e.clientX;
-                const y = e.clientY;
-                origin = {
-                    x: pointing.clientWidth * 0.2,
-                    y: window.innerHeight - pointing.clientHeight * 0.1
-                }
-                // calculate the rotation angle relative to the bottom left corner of the window
-                const rotation = Math.atan2(y - origin.y, x - origin.x) * 180 / Math.PI;
-                pointing.style.setProperty('--rotation', rotation + fingerDegreesOffest + 'deg');
-            });
+          // check if cursor is over pointing bounding box
+          const bindingBox = pointing.getBoundingClientRect();
+          const xOver = x >= bindingBox.left && x <= bindingBox.right;
+          const yOver = y >= bindingBox.top && y <= bindingBox.bottom;
 
-            const pics = document.getElementById('pics');
-            // scroll horizontally when scrolling vertically
-            pics.addEventListener('wheel', function (e) {
-                e.preventDefault();
-                const delta = - e.deltaY;
-                const scrollLeft = pics.scrollLeft;
-                pics.scrollLeft = scrollLeft - delta;
-            });
+          if (xOver && yOver) {
+            pointing.classList.add("pointing-mouseover");
+          } else {
+            pointing.classList.remove("pointing-mouseover");
+          }
         });
+
+        const pics = document.getElementById("pics");
+        // scroll horizontally when scrolling vertically
+        pics.addEventListener("wheel", function (e) {
+          e.preventDefault();
+          const delta = -e.deltaY;
+          const scrollLeft = pics.scrollLeft;
+          pics.scrollLeft = scrollLeft - delta;
+        });
+      });
     </script>
-</head>
+  </head>
 
-<body>
-    <h1 class="neonText" style="margin-bottom: 0rem;" id="maintitle">
-        <img width="35px" height="35px" src="./computer-ani.gif" alt="computer">
-        &gt;&gt;START
-        HERE&lt;&lt;
-        <img width="35px" height="35px" src="./computer-ani.gif" alt="computer">
+  <body>
+    <main style="margin: 0 0.5rem">
+      <hgroup style="margin: 2rem 0.25rem 1rem 0.25rem">
+        <h1 class="neonText" id="maintitle">
+          <img width="50px" height="50px" src="./computer-ani.gif" alt="computer" />
+          &gt;&gt;START HERE&lt;&lt;
+          <img width="50px" height="50px" src="./computer-ani.gif" alt="computer" />
+        </h1>
+        <h2
+          style="
+            text-align: center;
+            font-style: italic;
+            opacity: 0.5;
+            font-size: x-large;
+            filter: drop-shadow(2px 2px 3px black);
+          "
+        >
+          No gaming allowed
+        </h2>
+      </hgroup>
 
-    </h1>
-    <h2 style="font-style: italic; text-align: center; margin-top: 0; opacity: .5;">No gaming allowed</h2>
-    <section class="marquee">
-        <div class="marquee-text">
+      <div class="marquee" style="margin-block-end: 1rem">
+        <ul class="marquee__content">
+          <li>
             cache line size matters because fetching memory outside a cache line is slow the CPU reads memory in chunks
             usually 64 bytes wide when a data structure spans across two lines the CPU fetches both lines causing
-            latency
-            keep structures within a cache line for speed memory bus width is the number of bits transferred in one
-            operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
-            modern
-            CPUs optimize for specific alignment use aligned malloc for better performance data packing happens when
-            structs
-            have padding the compiler adds bytes to align fields on word boundaries for fast access packing fields
-            tightly
-            with #pragma pack removes padding but may slow access due to misalignment always balance between tight
-            packing
-            and proper alignment early error handling in C is crucial errors propagate fast the longer they go unhandled
-            check return values of functions and fail early it avoids cascading failures program termination should be
-            clean
-            exit codes matter zero means success non-zero indicates failure the caller can check this keep exit points
-            in
-            mind when designing functions use of asserts and debug logs help spot early failures zip zero initialization
-            is
-            a trick in C set memory to zero memset struct arrays before use to prevent uninitialized data bugs a common
-            source of crashes pointer arithmetic is dangerous always check boundaries buffer overruns are fatal in C
-            bounds
-            checking is manual think carefully before using pointers inline functions can reduce overhead for small
-            utility
-            functions but don't inline everything too much inlining increases code size blowing up instruction cache
-            branch
-            prediction in CPUs is key for fast execution the CPU guesses where code will go if it guesses wrong the
-            pipeline
-            flushes causing delays arrange if-else conditions for predictable branches frequent cases should be at the
-            top
-            minimize unpredictable jumps
-        </div>
-    </section>
-    <section id="firstrow">
-        <div style="overflow: hidden;">
-            <h1>
-                <img src="./title.png" alt="see you space cowboy...">
-            </h1>
-            <div id="rollcredits">
-                <pre id="credits">
+            latency keep structures within a cache line for speed memory bus width is the number of bits transferred in
+            one operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
+            modern CPUs optimize for specific alignment use aligned malloc for better performance data packing happens
+            when structs have padding the compiler adds bytes to align fields on word boundaries for fast access packing
+            fields tightly with #pragma pack removes padding but may slow access due to misalignment always balance
+            between tight packing and proper alignment early error handling in C is crucial errors propagate fast the
+            longer they go unhandled check return values of functions and fail early it avoids cascading failures
+            program termination should be clean exit codes matter zero means success non-zero indicates failure the
+            caller can check this keep exit points in mind when designing functions use of asserts and debug logs help
+            spot early failures zip zero initialization is a trick in C set memory to zero memset struct arrays before
+            use to prevent uninitialized data bugs a common source of crashes pointer arithmetic is dangerous always
+            check boundaries buffer overruns are fatal in C bounds checking is manual think carefully before using
+            pointers inline functions can reduce overhead for small utility functions but don't inline everything too
+            much inlining increases code size blowing up instruction cache branch prediction in CPUs is key for fast
+            execution the CPU guesses where code will go if it guesses wrong the pipeline flushes causing delays arrange
+            if-else conditions for predictable branches frequent cases should be at the top minimize unpredictable jumps
+          </li>
+        </ul>
+
+        <ul aria-hidden="true" class="marquee__content">
+          <li>
+            cache line size matters because fetching memory outside a cache line is slow the CPU reads memory in chunks
+            usually 64 bytes wide when a data structure spans across two lines the CPU fetches both lines causing
+            latency keep structures within a cache line for speed memory bus width is the number of bits transferred in
+            one operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
+            modern CPUs optimize for specific alignment use aligned malloc for better performance data packing happens
+            when structs have padding the compiler adds bytes to align fields on word boundaries for fast access packing
+            fields tightly with #pragma pack removes padding but may slow access due to misalignment always balance
+            between tight packing and proper alignment early error handling in C is crucial errors propagate fast the
+            longer they go unhandled check return values of functions and fail early it avoids cascading failures
+            program termination should be clean exit codes matter zero means success non-zero indicates failure the
+            caller can check this keep exit points in mind when designing functions use of asserts and debug logs help
+            spot early failures zip zero initialization is a trick in C set memory to zero memset struct arrays before
+            use to prevent uninitialized data bugs a common source of crashes pointer arithmetic is dangerous always
+            check boundaries buffer overruns are fatal in C bounds checking is manual think carefully before using
+            pointers inline functions can reduce overhead for small utility functions but don't inline everything too
+            much inlining increases code size blowing up instruction cache branch prediction in CPUs is key for fast
+            execution the CPU guesses where code will go if it guesses wrong the pipeline flushes causing delays arrange
+            if-else conditions for predictable branches frequent cases should be at the top minimize unpredictable jumps
+          </li>
+        </ul>
+      </div>
+
+      <section style="margin-inline: 1rem; gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap">
+        <div style="overflow: hidden">
+          <h1>
+            <img src="./title.png" alt="see you space cowboy..." />
+          </h1>
+          <div style="max-height: 45ch; overflow: hidden">
+            <style>
+              #credits {
+                text-shadow: 1px 1px 2px black;
+                transform: translateY(0);
+                /*loop the credits animation infinitely */
+                animation-delay: 1.5s;
+                animation-name: credits;
+                animation-duration: 30s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+              }
+
+              @keyframes credits {
+                0% {
+                  transform: translateY(0);
+                }
+
+                100% {
+                  transform: translateY(-100%);
+                }
+              }
+            </style>
+            <pre id="credits" style="color: white; font-family: 'Courier New', Courier, monospace">
 A BELL LABORATORIES PRODUCTION
 In association with the Research Division
 
@@ -394,68 +514,100 @@ Unix-inspired systems and descendants include:
 
 "The UNIX Philosophy"
 Small is beautiful, simplicity is key.
-</pre>
-            </div>
+</pre
+            >
+          </div>
         </div>
-
 
         <div class="links">
+          <h2>✨ kino video</h2>
+          <ul class="linklist">
+            <li>
+              CHADMAN Confirmed:
+              <a href="https://www.youtube.com/watch?v=TZ5a3gCCZYo">https://www.youtube.com/watch?v=TZ5a3gCCZYo</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=xt1KNDmOYqA">https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=r9gRk-Px7l4&">https://www.youtube.com/watch?v=r9gRk-Px7l4&</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=m5wsfLeQxH4">https://www.youtube.com/watch?v=m5wsfLeQxH4</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=IroPQ150F6c">https://www.youtube.com/watch?v=IroPQ150F6c</a>
+            </li>
+          </ul>
+          <hr style="margin-block: 1rem" />
+          <h2>😎 cool blogposts and channels</h2>
+          <ul>
+            <li>
+              <a href="https://www.rfleury.com/p/the-easiest-way-to-handle-errors"
+                >The Easiest Way To Handle Errors Is To Not Have Them</a
+              >
+            </li>
 
-            <h2>kino video</h2>
-            <ul class="linklist">
-                <li>CHADMAN Confirmed:
-                    <a
-                        href="https://www.youtube.com/watch?v=TZ5a3gCCZYo">https://www.youtube.com/watch?v=TZ5a3gCCZYo</a>
-                </li>
-                <li>
-                    <a
-                        href="https://www.youtube.com/watch?v=xt1KNDmOYqA">https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
-                </li>
-                <li>
-                    <a
-                        href="https://www.youtube.com/watch?v=r9gRk-Px7l4&">https://www.youtube.com/watch?v=r9gRk-Px7l4&</a>
-                </li>
-                <li>
-                    <a
-                        href="https://www.youtube.com/watch?v=m5wsfLeQxH4">https://www.youtube.com/watch?v=m5wsfLeQxH4</a>
-                </li>
-                <li>
-                    <a
-                        href="https://www.youtube.com/watch?v=IroPQ150F6c">https://www.youtube.com/watch?v=IroPQ150F6c</a>
-                </li>
-            </ul>
-            <hr>
-            <h2>cool blogposts and channels</h2>
-            <ul>
-                <li><a href="https://www.rfleury.com/p/the-easiest-way-to-handle-errors">The Easiest Way To Handle
-                        Errors Is To Not Have Them</a></li>
+            <li>
+              <a
+                href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/#:~:text=Use%20a%20data%20structure%20that%20makes%20illegal%20states%20unrepresentable"
+                >Parse, don't validate</a
+              >
+            </li>
+            <li><a href="https://www.youtube.com/@voxelrifts/videos">VoxelRifts</a></li>
+            <li><a href="https://www.youtube.com/watch?v=fLS99zJDHOc">From 0 TO 100</a></li>
+          </ul>
 
-                <li><a
-                        href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/#:~:text=Use%20a%20data%20structure%20that%20makes%20illegal%20states%20unrepresentable">Parse,
-                        don't validate</a></li>
-                <li><a href="https://www.youtube.com/@voxelrifts/videos">VoxelRifts</a></li>
-                <li><a href="https://www.youtube.com/watch?v=fLS99zJDHOc">From 0 TO 100</a></li>
-            </ul>
+          <h2>📸 cool pics</h2>
+          <section
+            class="reactive-image"
+            id="pics"
+            style="
+              background-color: rgb(32 32 32 / 50%);
+              /* blur effect */
+              backdrop-filter: blur(5px);
+              border-color: rgb(76, 76, 76);
+              border-top-color: rgb(166, 166, 166);
+              border-right-color: rgb(76, 76, 76);
+              border-bottom-color: rgb(35, 35, 35);
+              border-left-color: rgb(190, 190, 190);
+              border-width: 5px;
+              border-style: solid;
 
-            <h2>cool pics</h2>
-            <section id="pics">
-                <img src="./readyingup.png" alt="readying up">
-                <img src="./arch.png" alt="arch">
-                <img src="nagoorcorejava.gif" alt="nagoorcorejava">
-                <img src="mantra.jpg" alt="mantra">
-                <img src="./rest/1561298440876.gif" alt="rest">
-                <img src="./rest/1564129793038.gif" alt="rest">
-                <img src="./rest/2b5658e67fd06c3e6df0c7fdca7c1db1.jpg" alt="rest">
-                <img src="./rest/799px-Windows_2000_architecture.svg.png" alt="rest">
-                <img src="./rest/nice_proprietary_software.png" alt="rest">
+              max-width: 1000px;
 
-            </section>
-
+              padding: 0.75rem;
+              margin-block: 0.5rem;
+              display: flex;
+              flex-direction: row;
+              overflow: auto;
+              align-items: center;
+              gap: 1rem;
+              height: 290px;
+              scrollbar-color: #0400ff black;
+              scrollbar-width: thin;
+            "
+          >
+            <style>
+              #pics img {
+                max-width: 100%;
+                max-height: 100%;
+              }
+            </style>
+            <img src="./readyingup.png" alt="readying up" />
+            <img src="./arch.png" alt="arch" />
+            <img src="nagoorcorejava.gif" alt="nagoorcorejava" />
+            <img src="mantra.jpg" alt="mantra" />
+            <img src="./rest/1561298440876.gif" alt="rest" />
+            <img src="./rest/1564129793038.gif" alt="rest" />
+            <img src="./rest/2b5658e67fd06c3e6df0c7fdca7c1db1.jpg" alt="rest" />
+            <img src="./rest/799px-Windows_2000_architecture.svg.png" alt="rest" />
+            <img src="./rest/nice_proprietary_software.png" alt="rest" />
+          </section>
         </div>
-    </section>
-    <img id="pointing" src="./pointing.png" alt="pointing at the sky">
+      </section>
 
-
-</body>
-
+      <img id="pointing" src="./pointing.png" alt="pointing at the sky" />
+    </main>
+  </body>
 </html>
