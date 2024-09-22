@@ -242,33 +242,65 @@
         }
       }
 
+      :root {
+        --main-font-size: 4rem;
+        --sub-font-size: 2rem;
+        --img-height: 100px;
+        --sub-margin: 0rem;
+        --title-gap: 3rem;
+      }
+
       #maintitle {
-        /* margin: 4rem auto 3rem auto; */
         z-index: 2;
         text-align: center;
         display: flex;
         align-items: center;
-        gap: 3rem;
+        gap: var(--title-gap);
         flex-wrap: wrap;
         justify-content: center;
+
+        font-size: var(--main-font-size);
       }
 
-      /* scale font size of title to fit screen */
-      @media screen and (min-width: 1000px) {
-        #maintitle {
-          font-size: clamp(1rem, 10vw, 4rem);
-        }
-        
-        #maintitle img {
-          width: 100px;
-          height: 100px;
+      #maintitle img {
+        aspect-ratio: 1 / 1;
+        height: var(--img-height);
+      }
+
+      #subtitle {
+        text-align: center;
+        font-style: italic;
+        opacity: 0.5;
+        filter: drop-shadow(2px 2px 3px black);
+        font-size: var(--sub-font-size);
+        margin-block-start: var(--sub-margin);
+      }
+
+      @media screen and (max-width: 940px) {
+        :root {
+          --main-font-size: 3rem;
+          --sub-font-size: 1.5rem;
+          --img-height: 75px;
         }
       }
 
-      @media screen and (max-width: 1000px) {
-          #maintitle {
-            gap: 1rem;
-          font-size: clamp(1rem, 6vw, 2rem);
+      @media screen and (max-width: 720px) {
+        :root {
+          --main-font-size: 2rem;
+          --sub-font-size: 1rem;
+          --img-height: 25px;
+          --title-gap: 0.5rem;
+          --sub-margin: 0.5rem;
+        }
+      }
+
+            @media screen and (max-width: 400px) {
+        :root {
+          --main-font-size: 1.4rem;
+          --sub-font-size: 1rem;
+          --img-height: 25px;
+          --title-gap: 0.5rem;
+          --sub-margin: 0.5rem;
         }
       }
 
@@ -276,7 +308,7 @@
       .marquee {
         border: 2px dotted cornflowerblue;
         padding: 5px 15px;
-        font-family: "Comic Sans MS", "Comic Sans", "Routed Gothic", Arial, sans-serif;  
+        font-family: "Comic Sans MS", "Comic Sans", "Routed Gothic", Arial, sans-serif;
         font-size: 1.5rem;
         background-color: black;
         border-radius: 5px;
@@ -360,21 +392,11 @@
     <main style="margin: 0 0.5rem">
       <hgroup style="margin: 2rem 0.25rem 1rem 0.25rem">
         <h1 class="neonText" id="maintitle">
-          <img width="50px" height="50px" src="./computer-ani.gif" alt="computer" />
+          <img src="./computer-ani.gif" alt="computer" />
           &gt;&gt;START HERE&lt;&lt;
-          <img width="50px" height="50px" src="./computer-ani.gif" alt="computer" />
+          <img src="./computer-ani.gif" alt="computer" />
         </h1>
-        <h2
-          style="
-            text-align: center;
-            font-style: italic;
-            opacity: 0.5;
-            font-size: x-large;
-            filter: drop-shadow(2px 2px 3px black);
-          "
-        >
-          No gaming allowed
-        </h2>
+        <h2 id="subtitle">No gaming allowed</h2>
       </hgroup>
 
       <div class="marquee" style="margin-block-end: 1rem">
