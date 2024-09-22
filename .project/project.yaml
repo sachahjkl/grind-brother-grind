@@ -1,0 +1,8 @@
+name: "grind-brother-grind"
+description: "CS Starter Guide - https://sachahjkl.gitlab.io/grind-brother-grind/"
+topics: []
+homepage: ""
+source:
+  provider: gitlab
+  namespace: "sachahjkl"
+  path: "sachahjkl/grind-brother-grind"
