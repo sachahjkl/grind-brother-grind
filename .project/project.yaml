@@ -1,8 +1,8 @@
 name: "grind-brother-grind"
 description: "CS Starter Guide - https://sachahjkl.github.io/grind-brother-grind/"
 topics: []
-homepage: ""
+homepage: "https://sachahjkl.github.io/grind-brother-grind/"
 source:
-  provider: gitlab
+  provider: github
   namespace: "sachahjkl"
   path: "sachahjkl/grind-brother-grind"
