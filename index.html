@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -225,20 +225,41 @@
 
       .neonText {
         color: #fff;
-        text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,
-          0 0 102px #0fa, 0 0 151px #0fa;
+        text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px #0fa,
+          0 0 82px #0fa,
+          0 0 92px #0fa,
+          0 0 102px #0fa,
+          0 0 151px #0fa;
         animation: neonText 1s ease-in-out infinite alternate;
       }
 
       @keyframes neonText {
         from {
-          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa,
-            0 0 102px #0fa, 0 0 151px #0fa;
+          text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px #0fa,
+            0 0 82px #0fa,
+            0 0 92px #0fa,
+            0 0 102px #0fa,
+            0 0 151px #0fa;
         }
 
         to {
-          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f0f, 0 0 82px #f0f, 0 0 92px #f0f,
-            0 0 102px #f0f, 0 0 151px #f0f;
+          text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px #f0f,
+            0 0 82px #f0f,
+            0 0 92px #f0f,
+            0 0 102px #f0f,
+            0 0 151px #f0f;
         }
       }
 
@@ -348,44 +369,7 @@
       }
     </style>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const pointing = document.getElementById("pointing");
-        const fingerDegreesOffest = 31.9;
-
-        window.addEventListener("mousemove", function (e) {
-          const x = e.clientX;
-          const y = e.clientY;
-          origin = {
-            x: pointing.clientWidth * 0.2,
-            y: window.innerHeight - pointing.clientHeight * 0.1,
-          };
-          // calculate the rotation angle relative to the bottom left corner of the window
-          const rotation = (Math.atan2(y - origin.y, x - origin.x) * 180) / Math.PI;
-          pointing.style.setProperty("--rotation", rotation + fingerDegreesOffest + "deg");
-
-          // check if cursor is over pointing bounding box
-          const bindingBox = pointing.getBoundingClientRect();
-          const xOver = x >= bindingBox.left && x <= bindingBox.right;
-          const yOver = y >= bindingBox.top && y <= bindingBox.bottom;
-
-          if (xOver && yOver) {
-            pointing.classList.add("pointing-mouseover");
-          } else {
-            pointing.classList.remove("pointing-mouseover");
-          }
-        });
-
-        const pics = document.getElementById("pics");
-        // scroll horizontally when scrolling vertically
-        pics.addEventListener("wheel", function (e) {
-          e.preventDefault();
-          const delta = -e.deltaY;
-          const scrollLeft = pics.scrollLeft;
-          pics.scrollLeft = scrollLeft - delta;
-        });
-      });
-    </script>
+    <script src="./app.js"></script>
   </head>
 
   <body>
@@ -402,52 +386,64 @@
       <div class="marquee" style="margin-block-end: 1rem">
         <ul class="marquee__content">
           <li>
-            cache line size matters because fetching memory outside a cache line is slow the CPU reads memory in chunks
-            usually 64 bytes wide when a data structure spans across two lines the CPU fetches both lines causing
-            latency keep structures within a cache line for speed memory bus width is the number of bits transferred in
-            one operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
-            modern CPUs optimize for specific alignment use aligned malloc for better performance data packing happens
-            when structs have padding the compiler adds bytes to align fields on word boundaries for fast access packing
-            fields tightly with #pragma pack removes padding but may slow access due to misalignment always balance
-            between tight packing and proper alignment early error handling in C is crucial errors propagate fast the
-            longer they go unhandled check return values of functions and fail early it avoids cascading failures
-            program termination should be clean exit codes matter zero means success non-zero indicates failure the
-            caller can check this keep exit points in mind when designing functions use of asserts and debug logs help
-            spot early failures zip zero initialization is a trick in C set memory to zero memset struct arrays before
-            use to prevent uninitialized data bugs a common source of crashes pointer arithmetic is dangerous always
-            check boundaries buffer overruns are fatal in C bounds checking is manual think carefully before using
-            pointers inline functions can reduce overhead for small utility functions but don't inline everything too
-            much inlining increases code size blowing up instruction cache branch prediction in CPUs is key for fast
-            execution the CPU guesses where code will go if it guesses wrong the pipeline flushes causing delays arrange
-            if-else conditions for predictable branches frequent cases should be at the top minimize unpredictable jumps
+            cache line size matters because fetching memory outside a cache line is slow the CPU
+            reads memory in chunks usually 64 bytes wide when a data structure spans across two
+            lines the CPU fetches both lines causing latency keep structures within a cache line for
+            speed memory bus width is the number of bits transferred in one operation wider buses
+            mean faster access but misaligned data may split across transfers wasting cycles modern
+            CPUs optimize for specific alignment use aligned malloc for better performance data
+            packing happens when structs have padding the compiler adds bytes to align fields on
+            word boundaries for fast access packing fields tightly with #pragma pack removes padding
+            but may slow access due to misalignment always balance between tight packing and proper
+            alignment early error handling in C is crucial errors propagate fast the longer they go
+            unhandled check return values of functions and fail early it avoids cascading failures
+            program termination should be clean exit codes matter zero means success non-zero
+            indicates failure the caller can check this keep exit points in mind when designing
+            functions use of asserts and debug logs help spot early failures zip zero initialization
+            is a trick in C set memory to zero memset struct arrays before use to prevent
+            uninitialized data bugs a common source of crashes pointer arithmetic is dangerous
+            always check boundaries buffer overruns are fatal in C bounds checking is manual think
+            carefully before using pointers inline functions can reduce overhead for small utility
+            functions but don't inline everything too much inlining increases code size blowing up
+            instruction cache branch prediction in CPUs is key for fast execution the CPU guesses
+            where code will go if it guesses wrong the pipeline flushes causing delays arrange
+            if-else conditions for predictable branches frequent cases should be at the top minimize
+            unpredictable jumps
           </li>
         </ul>
 
         <ul aria-hidden="true" class="marquee__content">
           <li>
-            cache line size matters because fetching memory outside a cache line is slow the CPU reads memory in chunks
-            usually 64 bytes wide when a data structure spans across two lines the CPU fetches both lines causing
-            latency keep structures within a cache line for speed memory bus width is the number of bits transferred in
-            one operation wider buses mean faster access but misaligned data may split across transfers wasting cycles
-            modern CPUs optimize for specific alignment use aligned malloc for better performance data packing happens
-            when structs have padding the compiler adds bytes to align fields on word boundaries for fast access packing
-            fields tightly with #pragma pack removes padding but may slow access due to misalignment always balance
-            between tight packing and proper alignment early error handling in C is crucial errors propagate fast the
-            longer they go unhandled check return values of functions and fail early it avoids cascading failures
-            program termination should be clean exit codes matter zero means success non-zero indicates failure the
-            caller can check this keep exit points in mind when designing functions use of asserts and debug logs help
-            spot early failures zip zero initialization is a trick in C set memory to zero memset struct arrays before
-            use to prevent uninitialized data bugs a common source of crashes pointer arithmetic is dangerous always
-            check boundaries buffer overruns are fatal in C bounds checking is manual think carefully before using
-            pointers inline functions can reduce overhead for small utility functions but don't inline everything too
-            much inlining increases code size blowing up instruction cache branch prediction in CPUs is key for fast
-            execution the CPU guesses where code will go if it guesses wrong the pipeline flushes causing delays arrange
-            if-else conditions for predictable branches frequent cases should be at the top minimize unpredictable jumps
+            cache line size matters because fetching memory outside a cache line is slow the CPU
+            reads memory in chunks usually 64 bytes wide when a data structure spans across two
+            lines the CPU fetches both lines causing latency keep structures within a cache line for
+            speed memory bus width is the number of bits transferred in one operation wider buses
+            mean faster access but misaligned data may split across transfers wasting cycles modern
+            CPUs optimize for specific alignment use aligned malloc for better performance data
+            packing happens when structs have padding the compiler adds bytes to align fields on
+            word boundaries for fast access packing fields tightly with #pragma pack removes padding
+            but may slow access due to misalignment always balance between tight packing and proper
+            alignment early error handling in C is crucial errors propagate fast the longer they go
+            unhandled check return values of functions and fail early it avoids cascading failures
+            program termination should be clean exit codes matter zero means success non-zero
+            indicates failure the caller can check this keep exit points in mind when designing
+            functions use of asserts and debug logs help spot early failures zip zero initialization
+            is a trick in C set memory to zero memset struct arrays before use to prevent
+            uninitialized data bugs a common source of crashes pointer arithmetic is dangerous
+            always check boundaries buffer overruns are fatal in C bounds checking is manual think
+            carefully before using pointers inline functions can reduce overhead for small utility
+            functions but don't inline everything too much inlining increases code size blowing up
+            instruction cache branch prediction in CPUs is key for fast execution the CPU guesses
+            where code will go if it guesses wrong the pipeline flushes causing delays arrange
+            if-else conditions for predictable branches frequent cases should be at the top minimize
+            unpredictable jumps
           </li>
         </ul>
       </div>
 
-      <section style="margin-inline: 1rem; gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap">
+      <section
+        style="margin-inline: 1rem; gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap"
+      >
         <div style="overflow: hidden">
           <h1>
             <img src="./title.png" alt="see you space cowboy..." />
@@ -491,7 +487,10 @@
                 }
               }
             </style>
-            <pre id="credits" style="color: white; font-family: 'Courier New', Courier, monospace">
+            <pre
+              id="credits"
+              style="color: white; font-family: &quot;Courier New&quot;, Courier, monospace"
+            >
 A BELL LABORATORIES PRODUCTION
 In association with the Research Division
 
@@ -553,8 +552,7 @@ Unix-inspired systems and descendants include:
 
 "The UNIX Philosophy"
 Small is beautiful, simplicity is key.
-</pre
-            >
+</pre>
           </div>
         </div>
 
@@ -563,23 +561,33 @@ Small is beautiful, simplicity is key.
           <ul class="linklist">
             <li>
               CHADMAN Confirmed -
-              <a href="https://www.youtube.com/watch?v=TZ5a3gCCZYo">https://www.youtube.com/watch?v=TZ5a3gCCZYo</a>
+              <a href="https://www.youtube.com/watch?v=TZ5a3gCCZYo"
+                >https://www.youtube.com/watch?v=TZ5a3gCCZYo</a
+              >
             </li>
             <li>
               ZERO = VALID VALUE ?? -
-              <a href="https://www.youtube.com/watch?v=xt1KNDmOYqA"> https://www.youtube.com/watch?v=xt1KNDmOYqA</a>
+              <a href="https://www.youtube.com/watch?v=xt1KNDmOYqA">
+                https://www.youtube.com/watch?v=xt1KNDmOYqA</a
+              >
             </li>
             <li>
               WAIT..? IT'S ALL JUST BYTES ? -
-              <a href="https://www.youtube.com/watch?v=r9gRk-Px7l4&">https://www.youtube.com/watch?v=r9gRk-Px7l4&</a>
+              <a href="https://www.youtube.com/watch?v=r9gRk-Px7l4&"
+                >https://www.youtube.com/watch?v=r9gRk-Px7l4&</a
+              >
             </li>
             <li>
               You can just *DO* stuff -
-              <a href="https://www.youtube.com/watch?v=m5wsfLeQxH4">https://www.youtube.com/watch?v=m5wsfLeQxH4</a>
+              <a href="https://www.youtube.com/watch?v=m5wsfLeQxH4"
+                >https://www.youtube.com/watch?v=m5wsfLeQxH4</a
+              >
             </li>
             <li>
               Make it simple, make it work, understand it, make it twerk -
-              <a href="https://www.youtube.com/watch?v=IroPQ150F6c">https://www.youtube.com/watch?v=IroPQ150F6c</a>
+              <a href="https://www.youtube.com/watch?v=IroPQ150F6c"
+                >https://www.youtube.com/watch?v=IroPQ150F6c</a
+              >
             </li>
           </ul>
           <hr style="color: white; width: 100%; margin-block: 1rem; background-color: white" />
